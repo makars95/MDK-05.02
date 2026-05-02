@@ -1,0 +1,404 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================= -->
+    <!-- ЦВЕТОВАЯ ПАЛИТРА (СИНИЕ ОТТЕНКИ) -->
+    <!-- ========================= -->
+
+    <!-- Основные синие цвета -->
+    <SolidColorBrush x:Key="DeepBlueBrush" Color="#0A1172"/>
+    <!-- Тёмно-синий -->
+    <SolidColorBrush x:Key="NavyBlueBrush" Color="#131B82"/>
+    <!-- Военно-морской синий -->
+    <SolidColorBrush x:Key="RoyalBlueBrush" Color="#1E3A8A"/>
+    <!-- Королевский синий -->
+    <SolidColorBrush x:Key="MediumBlueBrush" Color="#2563EB"/>
+    <!-- Средний синий -->
+    <SolidColorBrush x:Key="DodgerBlueBrush" Color="#3B82F6"/>
+    <!-- Ярко-синий -->
+    <SolidColorBrush x:Key="CornflowerBrush" Color="#4F8BFF"/>
+    <!-- Васильковый -->
+    <SolidColorBrush x:Key="SteelBlueBrush" Color="#5A9CFF"/>
+    <!-- Стальной синий -->
+    <SolidColorBrush x:Key="LightBlueBrush" Color="#7CB8FF"/>
+    <!-- Светло-синий -->
+    <SolidColorBrush x:Key="SkyBlueBrush" Color="#A5D8FF"/>
+    <!-- Небесно-синий -->
+    <SolidColorBrush x:Key="PowderBlueBrush" Color="#C7E5FF"/>
+    <!-- Пудрово-синий -->
+    <SolidColorBrush x:Key="AliceBlueBrush" Color="#EFF6FF"/>
+    <!-- Алиса-синий (очень светлый) -->
+
+    <!-- Акцентные цвета (контрастные) -->
+    <SolidColorBrush x:Key="AccentGoldBrush" Color="#FBBF24"/>
+    <!-- Золотой для акцентов -->
+    <SolidColorBrush x:Key="AccentWhiteBrush" Color="#FFFFFF"/>
+    <!-- Белый -->
+    <SolidColorBrush x:Key="AccentGrayBrush" Color="#D1D5DB"/>
+    <!-- Светло-серый -->
+    <SolidColorBrush x:Key="AccentDarkGrayBrush" Color="#6B7280"/>
+    <!-- Тёмно-серый -->
+    <SolidColorBrush x:Key="AccentErrorBrush" Color="#EF4444"/>
+    <!-- Красный для ошибок -->
+    <SolidColorBrush x:Key="AccentSuccessBrush" Color="#10B981"/>
+    <!-- Зелёный для успеха -->
+    <SolidColorBrush x:Key="AccentWarningBrush" Color="#F59E0B"/>
+    <!-- Оранжевый для предупреждений -->
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ КНОПОК (Button) -->
+    <!-- ========================= -->
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource MediumBlueBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="MinWidth" Value="100"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource DodgerBlueBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource AccentWhiteBrush}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource DeepBlueBrush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{StaticResource AccentGrayBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource AccentDarkGrayBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для акцентной кнопки (золотая) -->
+    <Style x:Key="AccentButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AccentGoldBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FCD34D"/>
+                <!-- светлее золото -->
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ ТЕКСТОВЫХ ПОЛЕЙ (TextBox) -->
+    <!-- ========================= -->
+    <Style TargetType="TextBox">
+        <Setter Property="BorderBrush" Value="{StaticResource SteelBlueBrush}"/>
+        <Setter Property="BorderThickness" Value="1,1,1,2"/>
+        <Setter Property="Background" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="CaretBrush" Value="{StaticResource RoyalBlueBrush}"/>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource DodgerBlueBrush}"/>
+                <Setter Property="BorderThickness" Value="2,2,2,3"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для многострочного TextBox -->
+    <Style x:Key="MultilineTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="Height" Value="100"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ ТАБЛИЦЫ (DataGrid) -->
+    <!-- ========================= -->
+    <Style TargetType="DataGrid">
+        <Setter Property="Background" Value="{StaticResource AliceBlueBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource SteelBlueBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="RowBackground" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="AlternatingRowBackground" Value="{StaticResource PowderBlueBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource LightBlueBrush}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource LightBlueBrush}"/>
+        <Setter Property="HeadersVisibility" Value="Column"/>
+    </Style>
+
+    <!-- Стиль для заголовков колонок DataGrid -->
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="{StaticResource RoyalBlueBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ ВЫПАДАЮЩИХ СПИСКОВ (ComboBox) -->
+    <!-- ========================= -->
+    <Style TargetType="ComboBox">
+        <Setter Property="Background" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource SteelBlueBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="6,4"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Height" Value="32"/>
+    </Style>
+
+    <!-- Стиль для элементов внутри списка ComboBox -->
+    <Style TargetType="ComboBoxItem">
+        <Setter Property="Background" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Style.Triggers>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter Property="Background" Value="{StaticResource LightBlueBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ ВКЛАДОК (TabControl) -->
+    <!-- ========================= -->
+    <Style TargetType="TabControl">
+        <Setter Property="Background" Value="{StaticResource AliceBlueBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource SteelBlueBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <Style TargetType="TabItem">
+        <Setter Property="Background" Value="{StaticResource LightBlueBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="Padding" Value="15,8"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource MediumBlueBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource AccentWhiteBrush}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ ИЗОБРАЖЕНИЯ (Image) - ЛОГОТИП -->
+    <!-- ========================= -->
+    <Style x:Key="LogoImageStyle" TargetType="Image">
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Height" Value="120"/>
+        <Setter Property="Margin" Value="20,10,20,20"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <!-- Путь к изображению будет задан в конкретной форме -->
+        <!-- <Setter Property="Source" Value="../Images/logo.png"/> -->
+    </Style>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ LABEL -->
+    <!-- ========================= -->
+    <Style TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Margin" Value="5,5,5,2"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Стиль для заголовка (большой текст) -->
+    <Style x:Key="HeaderLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{StaticResource RoyalBlueBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="10"/>
+    </Style>
+
+    <LinearGradientBrush x:Key="ButtonGradientBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#3B82F6" Offset="0.0"/>
+        <GradientStop Color="#1E3A8A" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ ПАНЕЛЕЙ (Border, Panel) -->
+    <!-- ========================= -->
+    <Style x:Key="CardPanelStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="15"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="#0A1172" BlurRadius="5" ShadowDepth="2" Opacity="0.2"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ ПРОГРЕСС-БАРА (ProgressBar) -->
+    <!-- ========================= -->
+    <Style TargetType="ProgressBar">
+        <Setter Property="Background" Value="{StaticResource PowderBlueBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource DodgerBlueBrush}"/>
+        <Setter Property="Height" Value="8"/>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ ПРОВЕРКИ (CheckBox) -->
+    <!-- ========================= -->
+    <Style TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ ПЕРЕКЛЮЧАТЕЛЯ (RadioButton) -->
+    <!-- ========================= -->
+    <Style TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ БЛОКОВ ТЕКСТА (TextBlock) -->
+    <!-- ========================= -->
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- СТИЛИ ДЛЯ ОШИБОК (Validation) -->
+    <!-- ========================= -->
+    <Style x:Key="ErrorTooltipStyle" TargetType="ToolTip">
+        <Setter Property="Background" Value="{StaticResource AccentErrorBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ОКНА АВТОРИЗАЦИИ -->
+    <!-- ========================= -->
+
+    <!-- Стиль для логотипа (круглая обводка) -->
+    <Style x:Key="LogoBorderStyle" TargetType="Border">
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Height" Value="120"/>
+        <Setter Property="CornerRadius" Value="60"/>
+        <Setter Property="Background" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DodgerBlueBrush}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="#0A1172" BlurRadius="10" ShadowDepth="3" Opacity="0.2"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Стиль для круглого изображения -->
+    <Style x:Key="RoundedImageStyle" TargetType="Image">
+        <Setter Property="Width" Value="110"/>
+        <Setter Property="Height" Value="110"/>
+        <Setter Property="Stretch" Value="UniformToFill"/>
+    </Style>
+
+    <!-- Стиль для меток полей -->
+    <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Margin" Value="0,10,0,5"/>
+    </Style>
+
+    <!-- Стиль для PasswordBox -->
+    <Style x:Key="BasePasswordBoxStyle" TargetType="PasswordBox">
+        <Setter Property="BorderBrush" Value="{StaticResource SteelBlueBrush}"/>
+        <Setter Property="BorderThickness" Value="1,1,1,2"/>
+        <Setter Property="Background" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="CaretBrush" Value="{StaticResource RoyalBlueBrush}"/>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource DodgerBlueBrush}"/>
+                <Setter Property="BorderThickness" Value="2,2,2,3"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для кнопки показа/скрытия пароля -->
+    <Style x:Key="TogglePasswordButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource RoyalBlueBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource SteelBlueBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Margin" Value="5,0,0,0"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource LightBlueBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource DeepBlueBrush}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource PowderBlueBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для ссылок -->
+    <Style x:Key="LinkTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource DodgerBlueBrush}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="TextDecorations" Value="Underline"/>
+        <Setter Property="Margin" Value="0,10,0,5"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource RoyalBlueBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для сообщения об ошибке (Border) -->
+    <Style x:Key="ErrorMessageBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource AccentErrorBrush}"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Padding" Value="10,8"/>
+        <Setter Property="Margin" Value="10,0"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Стиль для текста ошибки -->
+    <Style x:Key="ErrorMessageTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AccentWhiteBrush}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+</ResourceDictionary>

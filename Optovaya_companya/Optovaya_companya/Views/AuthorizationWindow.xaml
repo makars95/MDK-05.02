@@ -1,0 +1,245 @@
+﻿<Window x:Class="Optovaya_companya.AuthorizationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Авторизация в системе OptTorgKrask"
+        Height="770" 
+        Width="600"
+        MinHeight="600" 
+        MinWidth="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resource/Theme/DefaultTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Логотип (круглый) -->
+        <Border Grid.Row="0" 
+                Style="{StaticResource LogoBorderStyle}"
+                Margin="0,15,0,15">
+            <Image Source="/Resource/Images/logo2.png" 
+                   Style="{StaticResource RoundedImageStyle}"/>
+        </Border>
+
+        <!-- Заголовок -->
+        <Border Grid.Row="1" 
+                Margin="0,0,0,20"
+                HorizontalAlignment="Center"
+                Width="430">
+            <TextBlock Text="🔐 Авторизация в системе"/>
+        </Border>
+
+        <!-- Форма входа -->
+        <StackPanel Grid.Row="2" 
+                    Margin="0,0,0,10" 
+                    x:Name="LoginPanel"
+                    HorizontalAlignment="Center">
+            <Border Style="{StaticResource CardPanelStyle}">
+                <StackPanel Width="380">
+                    <TextBlock Text="👤 Логин" 
+                               Style="{StaticResource FieldLabelStyle}"/>
+                    <TextBox x:Name="LoginTextBox" 
+                             Style="{StaticResource {x:Type TextBox}}"
+                             Margin="0,0,0,5"
+                             Width="380"/>
+
+                    <TextBlock Text="🔒 Пароль" 
+                               Style="{StaticResource FieldLabelStyle}"
+                               Margin="0,5,0,5"/>
+
+                    <!-- Поле пароля с кнопкой показа/скрытия -->
+                    <Grid Margin="0,0,0,20" Width="380">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <PasswordBox x:Name="PasswordBox" 
+                                     Style="{StaticResource BasePasswordBoxStyle}"
+                                     Grid.Column="0"
+                                     Width="335"/>
+
+                        <TextBox x:Name="PasswordVisibleTextBox" 
+                                 Style="{StaticResource {x:Type TextBox}}"
+                                 Grid.Column="0"
+                                 Width="335"
+                                 Visibility="Collapsed"/>
+
+                        <Button x:Name="TogglePasswordButton" 
+                                Content="👁️" 
+                                Style="{StaticResource TogglePasswordButtonStyle}"
+                                Grid.Column="1"
+                                Margin="8,0,0,0"
+                                Click="TogglePasswordVisibility_Click"/>
+                    </Grid>
+
+                    <Button x:Name="LoginButton" 
+                            Content="ВОЙТИ" 
+                            Style="{StaticResource {x:Type Button}}"
+                            Margin="0,5,0,10"
+                            Width="380"
+                            Click="LoginButton_Click"/>
+
+                    <TextBlock Text="Нет аккаунта? Зарегистрируйтесь" 
+                               Style="{StaticResource LinkTextStyle}"
+                               MouseLeftButtonDown="ShowRegistrationPanel"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <!-- Форма регистрации (скрыта по умолчанию) -->
+        <StackPanel Grid.Row="2" 
+                    Margin="0,0,0,10" 
+                    x:Name="RegisterPanel" 
+                    Visibility="Collapsed"
+                    HorizontalAlignment="Center">
+            <Border Style="{StaticResource CardPanelStyle}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                              MaxHeight="400"
+                              HorizontalScrollBarVisibility="Disabled"
+                              Margin="0,0,0,0">
+                    <StackPanel Width="400" Margin="0,0,0,10">
+                        <TextBlock Text="👤 Фамилия" 
+                                   Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox x:Name="RegSurnameTextBox" 
+                                 Style="{StaticResource {x:Type TextBox}}"
+                                 Margin="0,0,0,10"
+                                 Width="380"/>
+
+                        <TextBlock Text="👤 Имя" 
+                                   Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox x:Name="RegNameTextBox" 
+                                 Style="{StaticResource {x:Type TextBox}}"
+                                 Margin="0,0,0,10"
+                                 Width="380"/>
+
+                        <TextBlock Text="👤 Отчество" 
+                                   Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox x:Name="RegPatronymicTextBox" 
+                                 Style="{StaticResource {x:Type TextBox}}"
+                                 Margin="0,0,0,10"
+                                 Width="380"/>
+
+                        <TextBlock Text="📧 Электронная почта" 
+                                   Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox x:Name="RegEmailTextBox" 
+                                 Style="{StaticResource {x:Type TextBox}}"
+                                 Margin="0,0,0,10"
+                                 Width="380"/>
+
+                        <TextBlock Text="📞 Телефон" 
+                                   Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox x:Name="RegPhoneTextBox" 
+                                 Style="{StaticResource {x:Type TextBox}}"
+                                 Margin="0,0,0,10"
+                                 Width="380"
+                                 PreviewTextInput="RegPhoneTextBox_PreviewTextInput"
+                                 MaxLength="15"/>
+
+                        <TextBlock Text="👤 Логин" 
+                                   Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox x:Name="RegLoginTextBox" 
+                                 Style="{StaticResource {x:Type TextBox}}"
+                                 Margin="0,0,0,10"
+                                 Width="380"/>
+
+                        <TextBlock Text="🔒 Пароль" 
+                                   Style="{StaticResource FieldLabelStyle}"
+                                   Margin="0,0,0,5"/>
+
+                        <!-- Поле пароля регистрации -->
+                        <Grid Margin="0,0,0,10" Width="380">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <PasswordBox x:Name="RegPasswordBox" 
+                                         Style="{StaticResource BasePasswordBoxStyle}"
+                                         Grid.Column="0"
+                                         Width="335"/>
+
+                            <TextBox x:Name="RegPasswordVisibleTextBox" 
+                                     Style="{StaticResource {x:Type TextBox}}"
+                                     Grid.Column="0"
+                                     Width="335"
+                                     Visibility="Collapsed"/>
+
+                            <Button x:Name="ToggleRegPasswordButton" 
+                                    Content="👁️" 
+                                    Style="{StaticResource TogglePasswordButtonStyle}"
+                                    Grid.Column="1"
+                                    Margin="8,0,0,0"
+                                    Click="ToggleRegPasswordVisibility_Click"/>
+                        </Grid>
+
+                        <TextBlock Text="✓ Подтверждение пароля" 
+                                   Style="{StaticResource FieldLabelStyle}"
+                                   Margin="0,0,0,5"/>
+
+                        <!-- Поле подтверждения пароля -->
+                        <Grid Margin="0,0,0,20" Width="380">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <PasswordBox x:Name="ConfirmPasswordBox" 
+                                         Style="{StaticResource BasePasswordBoxStyle}"
+                                         Grid.Column="0"
+                                         Width="335"/>
+
+                            <TextBox x:Name="ConfirmPasswordVisibleTextBox" 
+                                     Style="{StaticResource {x:Type TextBox}}"
+                                     Grid.Column="0"
+                                     Width="335"
+                                     Visibility="Collapsed"/>
+
+                            <Button x:Name="ToggleConfirmPasswordButton" 
+                                    Content="👁️" 
+                                    Style="{StaticResource TogglePasswordButtonStyle}"
+                                    Grid.Column="1"
+                                    Margin="8,0,0,0"
+                                    Click="ToggleConfirmPasswordVisibility_Click"/>
+                        </Grid>
+
+                        <Button x:Name="RegisterButton" 
+                                Content="ЗАРЕГИСТРИРОВАТЬСЯ" 
+                                Style="{StaticResource AccentButtonStyle}"
+                                Margin="0,0,0,10"
+                                Width="380"
+                                Click="RegisterButton_Click"/>
+
+                        <TextBlock Text="← Вернуться ко входу" 
+                                   Style="{StaticResource LinkTextStyle}"
+                                   MouseLeftButtonDown="ShowLoginPanel"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </StackPanel>
+
+        <!-- Сообщения об ошибках -->
+        <Border x:Name="MessageBorder"
+                Grid.Row="3"
+                Style="{StaticResource ErrorMessageBorderStyle}"
+                Visibility="Collapsed"
+                Margin="0,10,0,0">
+            <TextBlock x:Name="MessageText" 
+                       Text="" 
+                       Style="{StaticResource ErrorMessageTextStyle}"/>
+        </Border>
+    </Grid>
+</Window>
