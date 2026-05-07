@@ -56,7 +56,7 @@ namespace OptTorg
                         using (var reader = await command.ExecuteReaderAsync())
                         {
                             CategoryComboBox.Items.Clear();
-                            CategoryComboBox.Items.Add(new CategoryItem { Id = 0, Name = "Без категории" });
+                            CategoryComboBox.Items.Add(new CategoryItem { Id = 0, Name = "Выберите категорию..." });
 
                             while (await reader.ReadAsync())
                             {
@@ -74,7 +74,7 @@ namespace OptTorg
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки категорий: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                AppMessages.ShowError($"Ошибка загрузки категорий: {ex.Message}", "Ошибка");
             }
         }
 
@@ -87,7 +87,6 @@ namespace OptTorg
             ProizvoditelTextBox.Text = _editingTovar.Proizvoditel;
             OpisanieTextBox.Text = _editingTovar.Opisanie;
 
-            // Выбираем единицу измерения
             for (int i = 0; i < EdinicaComboBox.Items.Count; i++)
             {
                 if ((EdinicaComboBox.Items[i] as ComboBoxItem)?.Content.ToString() == _editingTovar.Edinica_izmereniya)
@@ -97,7 +96,6 @@ namespace OptTorg
                 }
             }
 
-            // Выбираем категорию
             if (_editingTovar.Kategoriya_id > 0)
             {
                 for (int i = 0; i < CategoryComboBox.Items.Count; i++)
@@ -111,7 +109,6 @@ namespace OptTorg
                 }
             }
 
-            // Показываем текущее изображение
             if (!string.IsNullOrEmpty(_editingTovar.ImagePath))
             {
                 CurrentImageLabel.Visibility = Visibility.Visible;
@@ -151,7 +148,6 @@ namespace OptTorg
 
                     _selectedImagePath = $"/Resources/Images/Products/{fileName}";
 
-                    // Обновляем превью
                     var bitmap = new System.Windows.Media.Imaging.BitmapImage();
                     bitmap.BeginInit();
                     bitmap.UriSource = new Uri(destPath, UriKind.Absolute);
@@ -161,30 +157,61 @@ namespace OptTorg
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Ошибка копирования изображения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    AppMessages.ShowError($"Ошибка копирования изображения: {ex.Message}", "Ошибка");
                 }
             }
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // Валидация
             if (string.IsNullOrWhiteSpace(NaimenovanieTextBox.Text))
             {
-                MessageBox.Show("Введите наименование товара", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                AppMessages.ShowWarning("Пожалуйста, введите наименование товара", "Обязательное поле");
                 NaimenovanieTextBox.Focus();
                 return;
             }
 
-            decimal artikul = 0;
-            if (!string.IsNullOrWhiteSpace(ArtikulTextBox.Text))
+            if (string.IsNullOrWhiteSpace(ArtikulTextBox.Text))
             {
-                if (!decimal.TryParse(ArtikulTextBox.Text, out artikul))
-                {
-                    MessageBox.Show("Введите корректный артикул", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    ArtikulTextBox.Focus();
-                    return;
-                }
+                AppMessages.ShowWarning("Пожалуйста, введите артикул товара", "Обязательное поле");
+                ArtikulTextBox.Focus();
+                return;
+            }
+
+            decimal artikul = 0;
+            if (!decimal.TryParse(ArtikulTextBox.Text, out artikul))
+            {
+                AppMessages.ShowWarning("Введите корректный артикул (числовое значение)", "Ошибка формата");
+                ArtikulTextBox.Focus();
+                return;
+            }
+
+            if (CategoryComboBox.SelectedIndex <= 0)
+            {
+                AppMessages.ShowWarning("Пожалуйста, выберите категорию товара", "Обязательное поле");
+                CategoryComboBox.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(ProizvoditelTextBox.Text))
+            {
+                AppMessages.ShowWarning("Пожалуйста, введите производителя товара", "Обязательное поле");
+                ProizvoditelTextBox.Focus();
+                return;
+            }
+
+            if (EdinicaComboBox.SelectedIndex < 0)
+            {
+                AppMessages.ShowWarning("Пожалуйста, выберите единицу измерения", "Обязательное поле");
+                EdinicaComboBox.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(OpisanieTextBox.Text))
+            {
+                AppMessages.ShowWarning("Пожалуйста, введите описание товара", "Обязательное поле");
+                OpisanieTextBox.Focus();
+                return;
             }
 
             try
@@ -206,23 +233,22 @@ namespace OptTorg
 
                     if (!_isEditMode || _editingTovar.Tovar_id == 0)
                     {
-                        // ========== ТОЛЬКО ДОБАВЛЕНИЕ В ТАБЛИЦУ Tovari ==========
                         string insertTovarSql = @"
-                            INSERT INTO ""Tovari"" 
-                            (""Naimenovanie"", ""Artikul"", ""Opisanie"", ""Proizvoditel"", 
-                             ""Edinica_izmereniya"", ""Kategoriya_id"", ""ImagePath"") 
-                            VALUES (@naimenovanie, @artikul, @opisanie, @proizvoditel, 
-                                    @edinica, @kategoriya_id, @imagePath)
-                            RETURNING ""Tovar_id""";
+                    INSERT INTO ""Tovari"" 
+                    (""Naimenovanie"", ""Artikul"", ""Opisanie"", ""Proizvoditel"", 
+                     ""Edinica_izmereniya"", ""Kategoriya_id"", ""ImagePath"") 
+                    VALUES (@naimenovanie, @artikul, @opisanie, @proizvoditel, 
+                            @edinica, @kategoriya_id, @imagePath)
+                    RETURNING ""Tovar_id""";
 
                         using (NpgsqlCommand command = new NpgsqlCommand(insertTovarSql, connection))
                         {
                             command.Parameters.AddWithValue("@naimenovanie", NaimenovanieTextBox.Text.Trim());
                             command.Parameters.AddWithValue("@artikul", artikul);
-                            command.Parameters.AddWithValue("@opisanie", OpisanieTextBox.Text.Trim() ?? (object)DBNull.Value);
-                            command.Parameters.AddWithValue("@proizvoditel", ProizvoditelTextBox.Text.Trim() ?? (object)DBNull.Value);
+                            command.Parameters.AddWithValue("@opisanie", OpisanieTextBox.Text.Trim());
+                            command.Parameters.AddWithValue("@proizvoditel", ProizvoditelTextBox.Text.Trim());
                             command.Parameters.AddWithValue("@edinica", edinica);
-                            command.Parameters.AddWithValue("@kategoriya_id", kategoriyaId == 0 ? (object)DBNull.Value : kategoriyaId);
+                            command.Parameters.AddWithValue("@kategoriya_id", kategoriyaId);
                             command.Parameters.AddWithValue("@imagePath", _selectedImagePath ?? (object)DBNull.Value);
 
                             int newId = (int)await command.ExecuteScalarAsync();
@@ -231,26 +257,25 @@ namespace OptTorg
                     }
                     else
                     {
-                        // ========== ТОЛЬКО ОБНОВЛЕНИЕ В ТАБЛИЦЕ Tovari ==========
                         string updateTovarSql = @"
-                            UPDATE ""Tovari"" SET 
-                                ""Naimenovanie"" = @naimenovanie,
-                                ""Artikul"" = @artikul,
-                                ""Opisanie"" = @opisanie,
-                                ""Proizvoditel"" = @proizvoditel,
-                                ""Edinica_izmereniya"" = @edinica,
-                                ""Kategoriya_id"" = @kategoriya_id,
-                                ""ImagePath"" = @imagePath
-                            WHERE ""Tovar_id"" = @id";
+                    UPDATE ""Tovari"" SET 
+                        ""Naimenovanie"" = @naimenovanie,
+                        ""Artikul"" = @artikul,
+                        ""Opisanie"" = @opisanie,
+                        ""Proizvoditel"" = @proizvoditel,
+                        ""Edinica_izmereniya"" = @edinica,
+                        ""Kategoriya_id"" = @kategoriya_id,
+                        ""ImagePath"" = @imagePath
+                    WHERE ""Tovar_id"" = @id";
 
                         using (NpgsqlCommand command = new NpgsqlCommand(updateTovarSql, connection))
                         {
                             command.Parameters.AddWithValue("@naimenovanie", NaimenovanieTextBox.Text.Trim());
                             command.Parameters.AddWithValue("@artikul", artikul);
-                            command.Parameters.AddWithValue("@opisanie", OpisanieTextBox.Text.Trim() ?? (object)DBNull.Value);
-                            command.Parameters.AddWithValue("@proizvoditel", ProizvoditelTextBox.Text.Trim() ?? (object)DBNull.Value);
+                            command.Parameters.AddWithValue("@opisanie", OpisanieTextBox.Text.Trim());
+                            command.Parameters.AddWithValue("@proizvoditel", ProizvoditelTextBox.Text.Trim());
                             command.Parameters.AddWithValue("@edinica", edinica);
-                            command.Parameters.AddWithValue("@kategoriya_id", kategoriyaId == 0 ? (object)DBNull.Value : kategoriyaId);
+                            command.Parameters.AddWithValue("@kategoriya_id", kategoriyaId);
                             command.Parameters.AddWithValue("@imagePath", _selectedImagePath ?? (object)DBNull.Value);
                             command.Parameters.AddWithValue("@id", _editingTovar.Tovar_id);
                             await command.ExecuteNonQueryAsync();
@@ -258,7 +283,7 @@ namespace OptTorg
                     }
                 }
 
-                MessageBox.Show("Товар успешно сохранен в каталоге!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                AppMessages.ShowInfo("Товар успешно сохранен в каталоге!", "Успех");
                 DialogResult = true;
                 Close();
             }
@@ -266,17 +291,16 @@ namespace OptTorg
             {
                 if (ex.SqlState == "23505")
                 {
-                    MessageBox.Show("Ошибка: товар с таким артикулом уже существует.",
-                        "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    AppMessages.ShowError("Ошибка: товар с таким артикулом уже существует.", "Ошибка");
                 }
                 else
                 {
-                    MessageBox.Show($"Ошибка базы данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    AppMessages.ShowError($"Ошибка базы данных: {ex.Message}", "Ошибка");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка сохранения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                AppMessages.ShowError($"Ошибка сохранения: {ex.Message}", "Ошибка");
             }
             finally
             {

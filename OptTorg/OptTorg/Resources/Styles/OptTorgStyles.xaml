@@ -7,27 +7,31 @@
     <converters:TotalPriceConverter x:Key="TotalPriceConverter"/>
     <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
 
-    <!-- ТЕМНАЯ ТЕМА -->
+    <!-- ТЕМНАЯ ТЕМА  -->
 
+    <!-- Фоновые цвета -->
     <SolidColorBrush x:Key="DarkBgDark" Color="#1a1a2e"/>
     <SolidColorBrush x:Key="DarkBgMedium" Color="#16213e"/>
     <SolidColorBrush x:Key="DarkBgCard" Color="#1f2a44"/>
     <SolidColorBrush x:Key="DarkBgInput" Color="#2a385c"/>
 
+    <!-- Акцентные цвета -->
     <SolidColorBrush x:Key="DarkPrimaryBlue" Color="#00adb5"/>
     <SolidColorBrush x:Key="DarkPrimaryHover" Color="#00c4cc"/>
     <SolidColorBrush x:Key="DarkSuccessGreen" Color="#27ae60"/>
     <SolidColorBrush x:Key="DarkErrorRed" Color="#e74c3c"/>
     <SolidColorBrush x:Key="DarkWarningOrange" Color="#f39c12"/>
 
+    <!-- Текстовые цвета -->
     <SolidColorBrush x:Key="DarkTextPrimary" Color="#eeeeee"/>
     <SolidColorBrush x:Key="DarkTextSecondary" Color="#a0a0b0"/>
     <SolidColorBrush x:Key="DarkInputPlaceholder" Color="#6a7a9e"/>
 
+    <!-- Границы и разделители -->
     <SolidColorBrush x:Key="DarkBorderColor" Color="#3a4a6e"/>
     <SolidColorBrush x:Key="DarkSeparatorColor" Color="#2a3a5e"/>
 
-    <!-- СВЕТЛАЯ ТЕМА -->
+    <!-- СВЕТЛАЯ ТЕМА  -->
 
     <!-- Фоновые цвета -->
     <SolidColorBrush x:Key="LightBgDark" Color="#304458"/>
@@ -59,7 +63,7 @@
     <SolidColorBrush x:Key="LightButtonDanger" Color="#FF3B30"/>
 
     <!-- Текстовые цвета -->
-    <SolidColorBrush x:Key="LightTextPrimary" Color="#2C3E50"/>
+    <SolidColorBrush x:Key="LightTextPrimary" Color="Black"/>
     <SolidColorBrush x:Key="LightTextSecondary" Color="#7F8C8D"/>
     <SolidColorBrush x:Key="LightInputPlaceholder" Color="#95A5A6"/>
 
@@ -67,13 +71,8 @@
     <SolidColorBrush x:Key="LightBorderColor" Color="#E0E0E0"/>
     <SolidColorBrush x:Key="LightSeparatorColor" Color="#E0E0E0"/>
 
-    <LinearGradientBrush x:Key="LightHeaderGradient" EndPoint="1,0" StartPoint="0,0">
-        <GradientStop Color="#2266FF" Offset="0"/>
-        <GradientStop Color="#5E5CE6" Offset="0.5"/>
-        <GradientStop Color="#AF52DE" Offset="1"/>
-    </LinearGradientBrush>
 
-    <!-- АКТИВНЫЕ ЦВЕТА (по умолчанию - тёмная) -->
+    <!-- АКТИВНЫЕ ЦВЕТА (тёмная) -->
 
     <!-- Фоновые цвета -->
     <SolidColorBrush x:Key="BgDark" Color="#1a1a2e"/>
@@ -99,14 +98,8 @@
     <SolidColorBrush x:Key="BorderColor" Color="#3a4a6e"/>
     <SolidColorBrush x:Key="SeparatorColor" Color="#2a3a5e"/>
 
-    <!-- Градиент фона -->
-    <LinearGradientBrush x:Key="BgGradient" EndPoint="1,1" StartPoint="0,0">
-        <GradientStop Color="#1a1a2e" Offset="0"/>
-        <GradientStop Color="#16213e" Offset="0.5"/>
-        <GradientStop Color="#0f3460" Offset="1"/>
-    </LinearGradientBrush>
 
-    <!-- СТИЛИ ЭЛЕМЕНТОВ УПРАВЛЕНИЯ -->
+    <!--  СТИЛИ ЭЛЕМЕНТОВ УПРАВЛЕНИЯ  -->
 
     <!-- LightBlue (для ProgressBar) -->
     <SolidColorBrush x:Key="LightBlue" Color="#00adb5"/>
@@ -159,8 +152,8 @@
         <Setter Property="Foreground" Value="#2C3E50"/>
         <Setter Property="BorderBrush" Value="#E0E0E0"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="FontSize" Value="13"/>
         <Setter Property="Padding" Value="10,0"/>
+        <Setter Property="FontSize" Value="13"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Cursor" Value="IBeam"/>
         <Setter Property="Template">
@@ -448,7 +441,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Padding" Value="12,0,12,0"/>
+        <Setter Property="Padding" Value="4,0,12,0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="CaretBrush" Value="{DynamicResource PrimaryBlue}"/>
         <Setter Property="Template">
@@ -478,7 +471,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Padding" Value="12,0,12,0"/>
+        <Setter Property="Padding" Value="4,0,12,0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -503,7 +496,7 @@
     <Style x:Key="BaseComboBoxStyle" TargetType="ComboBox">
         <Setter Property="Height" Value="40"/>
         <Setter Property="Background" Value="{DynamicResource BgInput}"/>
-        <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+        <Setter Property="Foreground" Value="{DynamicResource InputPlaceholder}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FontSize" Value="14"/>
@@ -619,6 +612,172 @@
         <Setter Property="Clip">
             <Setter.Value>
                 <EllipseGeometry RadiusX="45" RadiusY="45" Center="45,45"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Стиль для DataGrid -->
+    <Style TargetType="DataGrid">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="RowHeight" Value="46"/>
+        <Setter Property="HeadersVisibility" Value="Column"/>
+        <Setter Property="GridLinesVisibility" Value="None"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="RowHeaderWidth" Value="0"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="SelectionUnit" Value="FullRow"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="AlternationCount" Value="2"/>
+    </Style>
+
+    <!-- Стиль для заголовков DataGrid -->
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="{DynamicResource PrimaryBlue}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Height" Value="42"/>
+        <Setter Property="Padding" Value="12,0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter Grid.Column="0" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="Center"/>
+                            <Path Grid.Column="1"
+                          x:Name="SortArrow"
+                          Width="8" Height="8"
+                          Margin="8,0,0,0"
+                          Stretch="Fill"
+                          Fill="White"
+                          Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="SortDirection" Value="Ascending">
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="SortArrow" Property="Data" Value="M0,5 L4,0 L8,5 Z"/>
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Descending">
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="SortArrow" Property="Data" Value="M0,0 L4,5 L8,0 Z"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Стиль для строк DataGrid -->
+    <Style TargetType="DataGridRow">
+        <Setter Property="Background" Value="{DynamicResource BgCard}"/>
+        <Setter Property="Height" Value="46"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource BgInput}"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{DynamicResource LightAccentTeal}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для ячеек DataGrid -->
+    <Style TargetType="DataGridCell">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="Transparent"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Стиль для TextBlock в ячейках DataGrid -->
+    <Style TargetType="TextBlock" x:Key="DataGridTextBlockStyle">
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+    </Style>
+
+    <Style x:Key="FilterCheckBoxStyle" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Border x:Name="Border"
+                    Background="{DynamicResource BgCard}"
+                    CornerRadius="8"
+                    Padding="10,5"
+                    BorderBrush="{DynamicResource BorderColor}"
+                    BorderThickness="1">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="CheckMark"
+                               Text="✓"
+                               FontSize="12"
+                               Foreground="White"
+                               Visibility="Collapsed"
+                               Margin="0,0,5,0"
+                               FontWeight="Bold"/>
+                            <ContentPresenter/>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource LightAccentTeal}"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource LightAccentTeal}"/>
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource LightAccentTeal}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Стиль для TabItem -->
+    <Style x:Key="CustomTabItemStyle" TargetType="TabItem">
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondary}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border x:Name="Border" Background="Transparent" CornerRadius="8" Padding="20,10" Margin="5,0">
+                        <ContentPresenter x:Name="ContentSite" ContentSource="Header"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource PrimaryBlue}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource BgInput}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>

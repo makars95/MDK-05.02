@@ -19,7 +19,6 @@
         Closed="Window_Closed">
 
     <Window.Resources>
-        <!-- Стиль для кнопки сворачивания -->
         <Style x:Key="WindowButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="45"/>
             <Setter Property="Height" Value="32"/>
@@ -70,7 +69,6 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Стиль для элементов ListBox -->
         <Style x:Key="NavListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="Template">
                 <Setter.Value>
@@ -110,15 +108,11 @@
             <Setter Property="ItemContainerStyle" Value="{DynamicResource NavListBoxItemStyle}"/>
         </Style>
 
-        <!-- DataTemplate -->
         <DataTemplate DataType="{x:Type viewmodels:CatalogViewModel}">
             <pages:CatalogPage/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:ClientsViewModel}">
             <pages:ClientsPage/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:ContractsViewModel}">
-            <pages:ContractsPage/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:OrdersViewModel}">
             <pages:OrdersPage/>
@@ -131,7 +125,7 @@
     <Border Background="{DynamicResource BgGradient}" CornerRadius="15">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -140,38 +134,30 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- ЗАГОЛОВОК ОКНА -->
             <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-                    CornerRadius="15,15,0,0"
                     Background="{DynamicResource BgDark}">
                 <Grid>
-                    <!-- Область для перетаскивания окна -->
                     <Border Background="Transparent" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"/>
 
-                    <!-- Кнопки управления окном -->
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Right" 
                                 VerticalAlignment="Center"
                                 Margin="0,0,10,0">
 
-                        <!-- Кнопка переключения темы -->
                         <ToggleButton x:Name="ThemeToggleButton"
                                       Style="{DynamicResource ThemeToggleButtonStyle}"
                                       Click="ThemeToggleButton_Click"
                                       Margin="0,0,5,0"/>
 
-                        <!-- Кнопка свернуть -->
                         <Button Style="{DynamicResource WindowButtonStyle}"
                                 Click="MinimizeButton_Click"
                                 Content="─"/>
 
-                        <!-- Кнопка развернуть/восстановить -->
                         <Button x:Name="MaximizeButton"
                                 Style="{DynamicResource WindowButtonStyle}"
                                 Click="MaximizeButton_Click"
                                 Content="□"/>
 
-                        <!-- Кнопка закрыть -->
                         <Button Style="{DynamicResource WindowButtonStyle}"
                                 Click="CloseButton_Click"
                                 Content="✕"
@@ -192,12 +178,10 @@
                 </Grid>
             </Border>
 
-            <!-- ЛЕВАЯ ПАНЕЛЬ -->
             <Border Grid.Row="1" Grid.Column="0" 
                     Background="{DynamicResource BgDark}"
                     CornerRadius="0,0,0,15">
                 <DockPanel>
-                    <!-- Логотип -->
                     <Border DockPanel.Dock="Top" Padding="0,20,0,20">
                         <StackPanel HorizontalAlignment="Center">
                             <Border Grid.Row="0" 
@@ -218,7 +202,6 @@
                         </StackPanel>
                     </Border>
 
-                    <!-- Навигация -->
                     <ListBox x:Name="NavigationListBox"
                              Style="{DynamicResource NavListBoxStyle}"
                              ItemsSource="{Binding ViewModelsCollection}"
@@ -226,11 +209,9 @@
                              DockPanel.Dock="Top"
                              Margin="10,20,10,0"/>
 
-                    <!-- Панель пользователя (нижняя часть левой панели) -->
                     <Border DockPanel.Dock="Bottom" 
                             Background="{DynamicResource BgDark}"
-                            Padding="15,15"
-                            CornerRadius="0,0,0,15">
+                            Padding="15,15">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                 <Border Width="50" Height="50" CornerRadius="25"
@@ -258,14 +239,11 @@
                 </DockPanel>
             </Border>
 
-            <!-- ==================== РАБОЧАЯ ОБЛАСТЬ ==================== -->
             <Border Grid.Row="1" Grid.Column="1" 
-                    Background="{DynamicResource BgMedium}"
-                    CornerRadius="0,0,15,15">
+                    Background="{DynamicResource BgMedium}">
                 <Frame NavigationUIVisibility="Hidden" Content="{Binding SelectedViewModel}"/>
             </Border>
 
-            <!-- Уголок для изменения размера окна -->
             <Border Grid.Row="1" Grid.Column="1" 
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Bottom"

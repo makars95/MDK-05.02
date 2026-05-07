@@ -14,13 +14,11 @@ namespace OptTorg
             InitializeComponent();
             DataContext = new MainWindowViewModel(user);
 
-            // Устанавливаем состояние кнопки темы
             UpdateThemeButton();
 
             UpdateMaximizeButton();
         }
 
-        // Переключение темы
         private void ThemeToggleButton_Click(object sender, RoutedEventArgs e)
         {
             ThemeService.ToggleTheme();
@@ -89,25 +87,29 @@ namespace OptTorg
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Вы действительно хотите выйти из системы?",
-                                         "Подтверждение выхода",
-                                         MessageBoxButton.YesNo,
-                                         MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            var result = AppMessages.ShowQuestion(
+                "Вы действительно хотите выйти из системы?",
+                "Подтверждение выхода");
+
+            if (result == CustomMessageBox.MessageBoxResult.Yes)
             {
-                Application.Current.Shutdown();
+                var loginWindow = new MainWindow();
+                loginWindow.Show();
+                this.Close();
             }
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Вы действительно хотите выйти из системы?",
-                                         "Подтверждение выхода",
-                                         MessageBoxButton.YesNo,
-                                         MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            var result = AppMessages.ShowQuestion(
+                "Вы действительно хотите выйти из системы?",
+                "Подтверждение выхода");
+
+            if (result == CustomMessageBox.MessageBoxResult.Yes)
             {
-                Application.Current.Shutdown();
+                var loginWindow = new MainWindow();
+                loginWindow.Show();
+                this.Close();
             }
         }
 
@@ -122,7 +124,20 @@ namespace OptTorg
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            Application.Current.Shutdown();
+            bool loginWindowExists = false;
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is MainWindow)
+                {
+                    loginWindowExists = true;
+                    break;
+                }
+            }
+            if (!loginWindowExists)
+            {
+                var loginWindow = new MainWindow();
+                loginWindow.Show();
+            }
         }
 
         protected override void OnStateChanged(EventArgs e)

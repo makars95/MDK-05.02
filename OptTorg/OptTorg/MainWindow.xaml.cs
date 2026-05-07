@@ -21,6 +21,12 @@ namespace OptTorg
         public MainWindow()
         {
             InitializeComponent();
+            this.Closed += MainWindow_Closed;
+        }
+
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -98,7 +104,6 @@ namespace OptTorg
 
         private async void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            // Получаем данные из полей
             string surname = RegSurnameTextBox.Text.Trim();
             string name = RegNameTextBox.Text.Trim();
             string patronymic = RegPatronymicTextBox.Text.Trim();
@@ -112,7 +117,6 @@ namespace OptTorg
                 ? ConfirmPasswordBox.Password
                 : ConfirmPasswordVisibleTextBox.Text;
 
-            // Валидация
             if (string.IsNullOrWhiteSpace(surname))
             {
                 ShowMessage("Пожалуйста, введите фамилию", true);
@@ -143,7 +147,6 @@ namespace OptTorg
                 return;
             }
 
-            // Проверка телефона - только цифры
             string phoneDigits = new string(phone.Where(char.IsDigit).ToArray());
             if (phoneDigits.Length != phone.Length)
             {
@@ -188,7 +191,6 @@ namespace OptTorg
                     {
                         try
                         {
-                            // Проверяем, существует ли такой пользователь
                             string checkSql = @"SELECT COUNT(*) FROM ""Avtorizaciya"" WHERE ""Login"" = @login";
 
                             using (NpgsqlCommand checkCmd = new NpgsqlCommand(checkSql, connection))
@@ -203,7 +205,6 @@ namespace OptTorg
                                 }
                             }
 
-                            // Вставляем данные в таблицу Avtorizaciya
                             string insertAuthSql = @"
                         INSERT INTO ""Avtorizaciya"" (""Login"", ""Parol"") 
                         VALUES (@login, @password)
@@ -218,7 +219,6 @@ namespace OptTorg
                                 authId = Convert.ToInt32(await insertAuthCmd.ExecuteScalarAsync());
                             }
 
-                            // Вставляем данные в таблицу Polzovateli (БЕЗ указания Polzovatel_id)
                             string insertUserSql = @"
                         INSERT INTO ""Polzovateli"" 
                         (""Familiya"", ""Imya"", ""Otchestvo"", ""Email"", ""Telefon"", ""Avtorizaciya_id"") 
@@ -241,7 +241,6 @@ namespace OptTorg
 
                                     ShowMessage("Регистрация успешна! Теперь вы можете войти.", false);
 
-                                    // Очищаем поля
                                     RegSurnameTextBox.Text = "";
                                     RegNameTextBox.Text = "";
                                     RegPatronymicTextBox.Text = "";
@@ -289,7 +288,6 @@ namespace OptTorg
         }
         private void RegPhoneTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            // Разрешаем только цифры
             foreach (char c in e.Text)
             {
                 if (!char.IsDigit(c))
@@ -300,7 +298,6 @@ namespace OptTorg
             }
         }
 
-        // Метод для валидации email
         private bool IsValidEmail(string email)
         {
             try
@@ -325,7 +322,7 @@ namespace OptTorg
 
             var mainWindow = new MainAppWindow1(user);
             mainWindow.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void ShowMessage(string message, bool isError)
@@ -348,7 +345,6 @@ namespace OptTorg
             RegisterPanel.Visibility = Visibility.Visible;
             MessageText.Visibility = Visibility.Collapsed;
 
-            // Очищаем все поля регистрации
             RegSurnameTextBox.Text = "";
             RegNameTextBox.Text = "";
             RegPatronymicTextBox.Text = "";
@@ -383,14 +379,12 @@ namespace OptTorg
             TogglePasswordButton.Content = "👁️";
         }
 
-        // Метод для показа/скрытия пароля при входе
         private void TogglePasswordVisibility_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (PasswordBox.Visibility == Visibility.Visible)
                 {
-                    // Переключаем на видимый текст
                     PasswordVisibleTextBox.Text = PasswordBox.Password;
                     PasswordVisibleTextBox.Visibility = Visibility.Visible;
                     PasswordBox.Visibility = Visibility.Collapsed;
@@ -398,7 +392,6 @@ namespace OptTorg
                 }
                 else
                 {
-                    // Переключаем обратно на скрытый пароль
                     PasswordBox.Password = PasswordVisibleTextBox.Text;
                     PasswordBox.Visibility = Visibility.Visible;
                     PasswordVisibleTextBox.Visibility = Visibility.Collapsed;
@@ -411,7 +404,6 @@ namespace OptTorg
             }
         }
 
-        // Метод для показа/скрытия пароля при регистрации
         private void ToggleRegPasswordVisibility_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -437,7 +429,6 @@ namespace OptTorg
             }
         }
 
-        // Метод для показа/скрытия подтверждения пароля
         private void ToggleConfirmPasswordVisibility_Click(object sender, RoutedEventArgs e)
         {
             try

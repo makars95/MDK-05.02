@@ -6,13 +6,11 @@
         xmlns:converters="clr-namespace:OptTorg.Converters"
         mc:Ignorable="d"
         Title="Редактирование товара" 
-        Height="650" 
-        Width="600"
-        WindowStartupLocation="CenterOwner"
+        Height="700"
+        WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize"
         MinHeight="500"
         MinWidth="500"
-        MaxHeight="500"
         MaxWidth="500"
         Background="{DynamicResource BgMedium}">
 
@@ -29,7 +27,6 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Заголовок -->
             <Border Grid.Row="0" Background="{DynamicResource PrimaryBlue}" Padding="15">
                 <Grid>
                     <TextBlock x:Name="TitleText" 
@@ -41,40 +38,31 @@
                 </Grid>
             </Border>
 
-            <!-- Форма -->
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="20">
                 <StackPanel>
-                    <!-- Наименование -->
                     <TextBlock Text="Наименование *" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
                     <TextBox x:Name="NaimenovanieTextBox" 
                              Style="{DynamicResource BaseTextBoxStyle}"
                              Height="40"
                              Margin="0,0,0,15"/>
-
-                    <!-- Артикул -->
-                    <TextBlock Text="Артикул" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
+                    <TextBlock Text="Артикул *" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
                     <TextBox x:Name="ArtikulTextBox" 
                              Style="{DynamicResource BaseTextBoxStyle}"
                              Height="40"
                              Margin="0,0,0,15"/>
-
-                    <!-- Категория -->
-                    <TextBlock Text="Категория" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
+                    <TextBlock Text="Категория *" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
                     <ComboBox x:Name="CategoryComboBox"
                               Style="{DynamicResource BaseComboBoxStyle}"
                               Height="40"
                               DisplayMemberPath="Name"
                               Margin="0,0,0,15"/>
-
-                    <!-- Производитель -->
-                    <TextBlock Text="Производитель" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
+                    <TextBlock Text="Производитель *" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
                     <TextBox x:Name="ProizvoditelTextBox" 
                              Style="{DynamicResource BaseTextBoxStyle}"
                              Height="40"
                              Margin="0,0,0,15"/>
 
-                    <!-- Единица измерения -->
-                    <TextBlock Text="Единица измерения" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
+                    <TextBlock Text="Единица измерения *" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
                     <ComboBox x:Name="EdinicaComboBox"
                               Style="{DynamicResource BaseComboBoxStyle}"
                               Height="40"
@@ -82,11 +70,9 @@
                         <ComboBoxItem Content="шт"/>
                         <ComboBoxItem Content="кг"/>
                         <ComboBoxItem Content="л"/>
-                        <ComboBoxItem Content="м²"/>
                     </ComboBox>
 
-                    <!-- Описание -->
-                    <TextBlock Text="Описание" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
+                    <TextBlock Text="Описание *" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
                     <TextBox x:Name="OpisanieTextBox" 
                              Style="{DynamicResource BaseTextBoxStyle}"
                              Height="100"
@@ -94,8 +80,6 @@
                              AcceptsReturn="True"
                              VerticalScrollBarVisibility="Auto"
                              Margin="0,0,0,15"/>
-
-                    <!-- Изображение -->
                     <TextBlock Text="Изображение" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,5"/>
                     <Grid Margin="0,0,0,15">
                         <Grid.ColumnDefinitions>
@@ -117,7 +101,6 @@
                         <Border Grid.Column="1"
                                 Width="80" 
                                 Height="80" 
-                                CornerRadius="5" 
                                 Margin="10,0,0,0"
                                 Background="{DynamicResource BgInput}"
                                 BorderBrush="{DynamicResource BorderColor}"
@@ -127,17 +110,15 @@
                         </Border>
                     </Grid>
 
-                    <!-- Панель для текущего изображения -->
                     <StackPanel x:Name="CurrentImagePanel">
                         <TextBlock x:Name="CurrentImageLabel" 
-                                   Text="Текущее изображение:" 
-                                   Style="{StaticResource FieldLabelStyle}" 
-                                   Margin="0,0,0,5"
-                                   Visibility="Collapsed"/>
+                                    Text="Текущее изображение:" 
+                                    Style="{StaticResource FieldLabelStyle}" 
+                                    Margin="0,0,0,5"
+                                    Visibility="Collapsed"/>
                         <Border x:Name="CurrentImageBorder"
                                 Width="100" 
                                 Height="100" 
-                                CornerRadius="5" 
                                 Margin="0,0,0,15"
                                 Background="{DynamicResource BgInput}"
                                 BorderBrush="{DynamicResource BorderColor}"
@@ -150,7 +131,6 @@
                 </StackPanel>
             </ScrollViewer>
 
-            <!-- Кнопки -->
             <Border Grid.Row="2" BorderBrush="{DynamicResource BorderColor}" BorderThickness="0,1,0,0" Padding="20">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button x:Name="SaveButton" 

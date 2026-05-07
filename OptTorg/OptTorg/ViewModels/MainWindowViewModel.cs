@@ -67,7 +67,7 @@ namespace OptTorg.ViewModels
             }
         }
 
-        public string UserPosition => "Сотрудник"; // Статичное значение, так как нет должности
+        public string UserPosition => "Сотрудник";
 
         public MainWindowViewModel(Polzovateli user)
         {
@@ -82,7 +82,6 @@ namespace OptTorg.ViewModels
 
             ViewModelsCollection.Add(new CatalogViewModel());
             ViewModelsCollection.Add(new ClientsViewModel());
-            ViewModelsCollection.Add(new ContractsViewModel());
             ViewModelsCollection.Add(new OrdersViewModel());
             ViewModelsCollection.Add(new StockViewModel());
 

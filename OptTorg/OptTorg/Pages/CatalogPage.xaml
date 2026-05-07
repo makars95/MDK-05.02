@@ -13,136 +13,19 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
         <converters:ImagePathConverter x:Key="ImagePathConverter"/>
-
-        <!-- Стиль для заголовков -->
-        <Style TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="{DynamicResource PrimaryBlue}"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Height" Value="42"/>
-            <Setter Property="Padding" Value="12,0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="DataGridColumnHeader">
-                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <ContentPresenter Grid.Column="0" 
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="Center"/>
-                                <Path Grid.Column="1"
-                                      x:Name="SortArrow"
-                                      Width="8" Height="8"
-                                      Margin="8,0,0,0"
-                                      Stretch="Fill"
-                                      Fill="White"
-                                      Visibility="Collapsed"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="SortDirection" Value="Ascending">
-                                <Setter TargetName="SortArrow" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="SortArrow" Property="Data" Value="M0,5 L4,0 L8,5 Z"/>
-                            </Trigger>
-                            <Trigger Property="SortDirection" Value="Descending">
-                                <Setter TargetName="SortArrow" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="SortArrow" Property="Data" Value="M0,0 L4,5 L8,0 Z"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Стиль для строк -->
-        <Style TargetType="DataGridRow">
-            <Setter Property="Background" Value="{DynamicResource BgCard}"/>
-            <Setter Property="Height" Value="46"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"/>
-            <Setter Property="BorderThickness" Value="0,0,0,1"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource BgInput}"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                </Trigger>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource PrimaryBlue}"/>
-                    <Setter Property="Foreground" Value="White"/>
-                </Trigger>
-                <Trigger Property="AlternationIndex" Value="1">
-                    <Setter Property="Background" Value="#1a2a4a"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <!-- Стиль для ячеек -->
-        <Style TargetType="DataGridCell">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="12,8"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
-            <Setter Property="FontSize" Value="13"/>
-        </Style>
-
-        <!-- Стиль для таблицы -->
-        <Style TargetType="DataGrid">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="RowHeight" Value="46"/>
-            <Setter Property="HeadersVisibility" Value="Column"/>
-            <Setter Property="GridLinesVisibility" Value="None"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="RowHeaderWidth" Value="0"/>
-            <Setter Property="SelectionMode" Value="Single"/>
-            <Setter Property="SelectionUnit" Value="FullRow"/>
-            <Setter Property="IsReadOnly" Value="True"/>
-            <Setter Property="AutoGenerateColumns" Value="False"/>
-            <Setter Property="AlternationCount" Value="2"/>
-        </Style>
-
-        <Style x:Key="CustomTabItemStyle" TargetType="TabItem">
-            <Setter Property="Foreground" Value="{DynamicResource TextSecondary}"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TabItem">
-                        <Border x:Name="Border" Background="Transparent" CornerRadius="8" Padding="20,10" Margin="5,0">
-                            <ContentPresenter x:Name="ContentSite" ContentSource="Header"
-                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource PrimaryBlue}"/>
-                                <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BgInput}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Page.Resources>
 
-    <Grid Margin="25">
+    <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Заголовок -->
         <Border Background="{DynamicResource BgCard}" 
                 CornerRadius="10,10,0,0"
-                Padding="15"
-                Margin="0,0,0,15">
+                Padding="10"
+                Margin="0,0,0,10">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -172,45 +55,188 @@
             </Grid>
         </Border>
 
-        <!-- Панель фильтрации -->
         <Border Grid.Row="1"
                 Background="{DynamicResource BgCard}"
                 CornerRadius="8"
                 Padding="15"
                 Margin="0,0,0,15">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="220"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Margin="0,0,15,0">
-                    <TextBlock Text="🔍 Поиск" Foreground="{DynamicResource PrimaryBlue}" FontWeight="SemiBold" Margin="0,0,0,6" FontSize="12"/>
-                    <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                             Style="{DynamicResource BaseTextBoxStyle}"
-                             Height="36"/>
+                <StackPanel Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="0,0,15,0">
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="🔍 Поиск" 
+                                   Foreground="{DynamicResource PrimaryBlue}" 
+                                   FontWeight="SemiBold" 
+                                   Margin="0,0,0,6" 
+                                   FontSize="12"/>
+                        <Grid>
+                            <TextBox x:Name="SearchTextBox"
+                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{DynamicResource BaseTextBoxStyle}"
+                                     Height="36"
+                                     Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock x:Name="SearchPlaceholder"
+                                       Text="Поиск по наименованию, артикулу, производителю..."
+                                       FontSize="13"
+                                       VerticalAlignment="Center"
+                                       Margin="12,0,0,0"
+                                       IsHitTestVisible="False">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="#9ACEEB"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsKeyboardFocused, ElementName=SearchTextBox}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SearchTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SearchTextBox}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="📂 Категории" 
+                                   Foreground="{DynamicResource PrimaryBlue}" 
+                                   FontWeight="SemiBold" 
+                                   Margin="0,0,0,6" 
+                                   FontSize="12"/>
+                        <ListBox x:Name="CategoryListBox"
+                                 ItemsSource="{Binding CategoryNames}"
+                                 SelectionMode="Multiple"
+                                 BorderThickness="0"
+                                 Background="Transparent">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding}"
+                                      IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                      Margin="0,0,10,5"
+                                      Style="{DynamicResource FilterCheckBoxStyle}"
+                                      Checked="FilterCheckBox_Changed"
+                                      Unchecked="FilterCheckBox_Changed"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <TextBlock Text="🏭 Производители" 
+                                   Foreground="{DynamicResource PrimaryBlue}" 
+                                   FontWeight="SemiBold" 
+                                   Margin="0,0,0,6" 
+                                   FontSize="12"/>
+                        <ListBox x:Name="ManufacturerListBox"
+                                 ItemsSource="{Binding Manufacturers}"
+                                 SelectionMode="Multiple"
+                                 BorderThickness="0"
+                                 Background="Transparent">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding}"
+                                      IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                      Margin="0,0,10,5"
+                                      Style="{DynamicResource FilterCheckBoxStyle}"
+                                      Checked="FilterCheckBox_Changed"
+                                      Unchecked="FilterCheckBox_Changed"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    </StackPanel>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Margin="0,0,15,0">
-                    <TextBlock Text="📂 Категория" Foreground="{DynamicResource PrimaryBlue}" FontWeight="SemiBold" Margin="0,0,0,6" FontSize="12"/>
-                    <ComboBox ItemsSource="{Binding CategoryNames}"
-                              SelectedItem="{Binding SelectedCategoryFilter}"
+                <StackPanel Grid.Row="0" Grid.Column="1">
+                    <TextBlock Text="📋 Сортировка" 
+                               Foreground="{DynamicResource PrimaryBlue}" 
+                               FontWeight="SemiBold" 
+                               Margin="0,0,0,6" 
+                               FontSize="12"/>
+                    <ComboBox x:Name="SortComboBox"
+                              SelectedIndex="{Binding SelectedSort}"
                               Style="{DynamicResource BaseComboBoxStyle}"
-                              Height="36"/>
+                              Height="36"
+                              SelectionChanged="SortComboBox_SelectionChanged">
+                        <ComboBoxItem Content="По наименованию (А-Я)"/>
+                        <ComboBoxItem Content="По наименованию (Я-А)"/>
+                        <ComboBoxItem Content="По артикулу (возр.)"/>
+                        <ComboBoxItem Content="По артикулу (убыв.)"/>
+                    </ComboBox>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2">
-                    <TextBlock Text="🏭 Производитель" Foreground="{DynamicResource PrimaryBlue}" FontWeight="SemiBold" Margin="0,0,0,6" FontSize="12"/>
-                    <ComboBox ItemsSource="{Binding Manufacturers}"
-                              SelectedItem="{Binding SelectedManufacturerFilter}"
-                              Style="{DynamicResource BaseComboBoxStyle}"
-                              Height="36"/>
-                </StackPanel>
+                <Border Grid.Row="1" Grid.Column="1" 
+                        Background="{DynamicResource BgInput}" 
+                        CornerRadius="6" 
+                        Padding="10" 
+                        Margin="0,10,0,0"
+                        VerticalAlignment="Bottom">
+                    <StackPanel>
+                        <TextBlock Text="Результаты поиска:" 
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   FontWeight="SemiBold"
+                                   FontSize="12"
+                                   Margin="0,0,0,5"/>
+                        <TextBlock FontSize="20" 
+                                   FontWeight="Bold" 
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   HorizontalAlignment="Center">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} из {1}">
+                                    <Binding Path="CurrentCountElements"/>
+                                    <Binding Path="CountAllElements"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
             </Grid>
         </Border>
 
-        <!-- Таблица товаров -->
         <TabControl Grid.Row="2"
                     Background="Transparent"
                     BorderThickness="0"
@@ -236,7 +262,7 @@
                               AlternationCount="2">
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Tovar_id}" Width="55">
+                            <DataGridTextColumn Header="ID" Binding="{Binding Tovar_id}" Width="40">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -245,19 +271,13 @@
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Артикул" Binding="{Binding Artikul}" Width="100">
+                            <DataGridTextColumn Header="Артикул" Binding="{Binding Artikul}" Width="80">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
-                                        <Setter Property="Foreground" Value="{DynamicResource PrimaryBlue}"/>
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
                                         <Setter Property="FontWeight" Value="SemiBold"/>
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-                                        <Setter Property="Tag" Value="Artikul"/>
-                                        <EventSetter Event="Click" Handler="SortColumn_Click"/>
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
                             <DataGridTextColumn Header="Наименование" Binding="{Binding Naimenovanie}" Width="*">
@@ -266,28 +286,21 @@
                                         <Setter Property="FontWeight" Value="SemiBold"/>
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-                                        <Setter Property="Tag" Value="Naimenovanie"/>
-                                        <EventSetter Event="Click" Handler="SortColumn_Click"/>
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Описание" Binding="{Binding Opisanie}" Width="250">
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Opisanie}" Width="*">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-                                        <Setter Property="Foreground" Value="{DynamicResource TextSecondary}"/>
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
 
-                            <DataGridTextColumn Header="Категория" Binding="{Binding Nazvanie_kategorii}" Width="130"/>
+                            <DataGridTextColumn Header="Категория" Binding="{Binding Nazvanie_kategorii}" Width="120"/>
 
                             <DataGridTextColumn Header="Производитель" Binding="{Binding Proizvoditel}" Width="150"/>
 
-                            <DataGridTextColumn Header="Ед. изм." Binding="{Binding Edinica_izmereniya}" Width="85">
+                            <DataGridTextColumn Header="Ед. изм." Binding="{Binding Edinica_izmereniya}" Width="75">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -297,7 +310,6 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <!-- Нижняя панель -->
                     <Border Grid.Row="1" 
                             Background="{DynamicResource BgCard}" 
                             CornerRadius="8" 
@@ -339,7 +351,6 @@
                 </Grid>
             </TabItem>
 
-            <!-- Вкладка 2: Карточки товаров -->
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -348,81 +359,182 @@
                     </StackPanel>
                 </TabItem.Header>
 
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <ItemsControl ItemsSource="{Binding FilteredTovary}" Margin="0,10,0,0">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Width="300"
-                                        Margin="10"
-                                        Background="{DynamicResource BgCard}"
-                                        CornerRadius="12"
-                                        BorderBrush="{DynamicResource BorderColor}"
-                                        BorderThickness="1"
-                                        Cursor="Hand">
-                                    <Grid Margin="12">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
+                <Grid Background="{DynamicResource BgMedium}" Margin="0,10,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                                        <Border Grid.Row="0"
-                                                Height="180"
-                                                CornerRadius="8"
-                                                Background="{DynamicResource BgInput}"
-                                                Margin="0,0,0,10">
-                                            <Image Source="{Binding ImagePath, Converter={StaticResource ImagePathConverter}}"
-                                                   Stretch="Uniform"
-                                                   StretchDirection="Both"/>
-                                        </Border>
+                    <ScrollViewer Grid.Row="0" 
+                                  VerticalScrollBarVisibility="Auto" 
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                        <ListBox ItemsSource="{Binding FilteredTovary}"
+                                 SelectedItem="{Binding SelectedTovar}"
+                                 SelectionMode="Single"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" 
+                                   HorizontalAlignment="Left"
+                                   ItemWidth="320"
+                                   MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border x:Name="Border" 
+                                                        Background="{TemplateBinding Background}"
+                                                        Padding="0"
+                                                        Margin="0">
+                                                    <ContentPresenter/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border x:Name="CardBorder"
+                                            Width="300"
+                                            Margin="10"
+                                            Background="{DynamicResource BgCard}"
+                                            CornerRadius="12"
+                                            BorderBrush="{DynamicResource BorderColor}"
+                                            BorderThickness="2">
+                                        <Grid Margin="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
 
-                                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,8">
-                                            <Border Background="{DynamicResource PrimaryBlue}" CornerRadius="10" Padding="8,3">
-                                                <TextBlock Text="{Binding Artikul, StringFormat='Арт: {0}'}" 
-                                                           FontSize="10" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}"/>
+                                            <Border Grid.Row="0"
+                                                    Height="180"
+                                                    CornerRadius="8"
+                                                    Background="{DynamicResource BgInput}"
+                                                    Margin="0,0,0,10">
+                                                <Image Source="{Binding ImagePath, Converter={StaticResource ImagePathConverter}}"
+                                                       Stretch="Uniform"
+                                                       StretchDirection="Both"/>
                                             </Border>
-                                            <Border Background="{DynamicResource BgInput}" CornerRadius="10" Padding="8,3" Margin="5,0,0,0">
-                                                <TextBlock Text="{Binding Nazvanie_kategorii}" FontSize="10" Foreground="{DynamicResource TextSecondary}"/>
-                                            </Border>
-                                        </StackPanel>
 
-                                        <TextBlock Grid.Row="2"
-                                                   Text="{Binding Naimenovanie}"
-                                                   FontWeight="Bold"
-                                                   FontSize="14"
-                                                   Foreground="{DynamicResource TextPrimary}"
-                                                   TextWrapping="Wrap"
-                                                   Margin="0,0,0,8"/>
+                                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,8">
+                                                <Border Background="{DynamicResource PrimaryBlue}" CornerRadius="10" Padding="8,3">
+                                                    <TextBlock Text="{Binding Artikul, StringFormat='Арт: {0}'}" 
+                                                               FontSize="10" FontWeight="Bold" Foreground="White"/>
+                                                </Border>
+                                                <Border Background="{DynamicResource PrimaryBlue}" CornerRadius="10" Padding="8,3" Margin="5,0,0,0">
+                                                    <TextBlock Text="{Binding Nazvanie_kategorii}" 
+                                                               FontSize="10" 
+                                                               FontWeight="SemiBold"
+                                                               Foreground="White"/>
+                                                </Border>
+                                            </StackPanel>
 
-                                        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,5">
-                                            <TextBlock Text="🏭 " FontSize="12"/>
-                                            <TextBlock Text="Производитель: " FontSize="11" Foreground="{DynamicResource TextSecondary}"/>
-                                            <TextBlock Text="{Binding Proizvoditel}" FontSize="11" FontWeight="SemiBold" 
-                                                       Foreground="{DynamicResource PrimaryBlue}" TextWrapping="Wrap" MaxWidth="180"/>
-                                        </StackPanel>
+                                            <TextBlock Grid.Row="2"
+                                                       Text="{Binding Naimenovanie}"
+                                                       FontWeight="Bold"
+                                                       FontSize="14"
+                                                       Foreground="{DynamicResource TextPrimary}"
+                                                       TextWrapping="Wrap"
+                                                       Margin="0,0,0,8"/>
 
-                                        <TextBlock Grid.Row="5"
-                                                   Text="{Binding Opisanie}"
-                                                   FontSize="11"
-                                                   Foreground="{DynamicResource TextSecondary}"
-                                                   TextWrapping="Wrap"
-                                                   MaxHeight="60"
-                                                   Margin="0,5,0,0"/>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
+                                            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,5">
+                                                <TextBlock Text="🏭 " FontSize="12"/>
+                                                <TextBlock Text="Производитель: " FontSize="11" Foreground="{DynamicResource TextSecondary}"/>
+                                                <TextBlock Text="{Binding Proizvoditel}" FontSize="11" FontWeight="SemiBold" 
+                                                 Foreground="{DynamicResource PrimaryBlue}" TextWrapping="Wrap" MaxWidth="180"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,0,0,5">
+                                                <TextBlock Text="📏 " FontSize="12"/>
+                                                <TextBlock Text="Ед. изм.: " FontSize="11" Foreground="{DynamicResource TextSecondary}"/>
+                                                <TextBlock Text="{Binding Edinica_izmereniya}" FontSize="11" FontWeight="SemiBold" 
+                                               Foreground="{DynamicResource TextPrimary}"/>
+                                            </StackPanel>
+
+                                            <TextBlock Grid.Row="5"
+                                                       Text="{Binding Opisanie}"
+                                                       FontSize="11"
+                                                       Foreground="{DynamicResource TextSecondary}"
+                                                       TextWrapping="Wrap"
+                                                       MaxHeight="60"
+                                                       Margin="0,5,0,0"/>
+                                        </Grid>
+                                    </Border>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
+                                            <Setter TargetName="CardBorder" Property="BorderBrush" Value="{DynamicResource PrimaryBlue}"/>
+                                            <Setter TargetName="CardBorder" Property="BorderThickness" Value="3"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+
+                    <Border Grid.Row="1" 
+                            Background="{DynamicResource BgCard}" 
+                            CornerRadius="8" 
+                            Padding="12,10"
+                            Margin="0,10,0,0">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Button Content="✏️ Редактировать"
+                                        Width="120"
+                                        Height="32"
+                                        Margin="0,0,10,0"
+                                        Command="{Binding EditCommand}"
+                                        Background="{DynamicResource PrimaryBlue}"
+                                        Foreground="White"
+                                        BorderThickness="0"
+                                        Cursor="Hand"
+                                        FontSize="12"/>
+                                <Button Content="🗑️ Удалить"
+                                        Width="100"
+                                        Height="32"
+                                        Command="{Binding DeleteCommand}"
+                                        Background="{DynamicResource ErrorRed}"
+                                        Foreground="White"
+                                        BorderThickness="0"
+                                        Cursor="Hand"
+                                        FontSize="12"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <TextBlock Text="📊 Всего: " Foreground="{DynamicResource TextSecondary}" FontSize="12"/>
+                                <TextBlock Text="{Binding FilteredTovary.Count}" 
+                                           Foreground="{DynamicResource PrimaryBlue}"
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           Margin="3,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

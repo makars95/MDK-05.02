@@ -1,0 +1,153 @@
+﻿<Window x:Class="OptTorg.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Сообщение" 
+        Height="220" 
+        Width="400"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        Topmost="True">
+
+    <Window.Resources>
+        <Style x:Key="MessageBoxButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="90"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="4"
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="{DynamicResource BgCard}" 
+            BorderBrush="{DynamicResource BorderColor}" 
+            BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="15" ShadowDepth="3" Opacity="0.3" Color="Black"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" 
+                    Background="{DynamicResource PrimaryBlue}">
+                <Grid Margin="15,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock x:Name="IconBlock" 
+                                   Text="ℹ️" 
+                                   FontSize="18" 
+                                   Margin="0,0,8,0"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TitleText" 
+                                   Text="Заголовок" 
+                                   FontSize="16" 
+                                   FontWeight="Bold" 
+                                   Foreground="White"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <Button x:Name="CloseButton"
+                            Content="✕"
+                            Width="28"
+                            Height="28"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Foreground="White"
+                            FontSize="14"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Click="CloseButton_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" 
+                                        CornerRadius="4">
+                                    <ContentPresenter HorizontalAlignment="Center" 
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#CC0000"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Margin="20,15,20,10">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="MessageText" 
+                               Text="Сообщение" 
+                               FontSize="15" 
+                               Foreground="{DynamicResource TextSecondary}"
+                               TextWrapping="Wrap"
+                               VerticalAlignment="Center"
+                               LineHeight="20"/>
+                </ScrollViewer>
+            </Border>
+
+            <Border Grid.Row="1" 
+                    Height="1" 
+                    Background="{DynamicResource BorderColor}" 
+                    VerticalAlignment="Bottom"
+                    Margin="15,0"/>
+
+            <Border Grid.Row="2" Padding="15" Margin="0,5,0,0">
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center">
+                    <Button x:Name="OkButton"
+                            Content="OK"
+                            Style="{StaticResource MessageBoxButtonStyle}"
+                            Background="{DynamicResource PrimaryBlue}"
+                            Margin="0,0,10,0"
+                            Click="OkButton_Click"
+                            Visibility="Collapsed"/>
+                    <Button x:Name="YesButton"
+                            Content="Да"
+                            Style="{StaticResource MessageBoxButtonStyle}"
+                            Background="{DynamicResource SuccessGreen}"
+                            Margin="0,0,10,0"
+                            Click="YesButton_Click"
+                            Visibility="Collapsed"/>
+                    <Button x:Name="NoButton"
+                            Content="Нет"
+                            Style="{StaticResource MessageBoxButtonStyle}"
+                            Background="{DynamicResource DarkErrorRed}"
+                            Foreground ="White"
+                            Click="NoButton_Click"
+                            Visibility="Collapsed"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

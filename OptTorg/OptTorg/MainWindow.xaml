@@ -8,9 +8,19 @@
         Width="600"
         MinHeight="600" 
         MinWidth="500"
-        Background="{DynamicResource DarkBgMedium}"
+        MaxWidth="600"
+        MaxHeight="770"
+        Background="{DynamicResource BgMedium}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/OptTorgStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -92,7 +102,6 @@
             </Border>
         </StackPanel>
 
-        <!-- Форма регистрации (скрыта по умолчанию) -->
         <StackPanel Grid.Row="2" 
                     Margin="0,0,0,10" 
                     x:Name="RegisterPanel" 
@@ -152,7 +161,6 @@
                                    Style="{DynamicResource FieldLabelStyle}"
                                    Margin="0,0,0,5"/>
 
-                        <!-- Поле пароля регистрации -->
                         <Grid Margin="0,0,0,10" Width="380">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -182,7 +190,6 @@
                                    Style="{DynamicResource FieldLabelStyle}"
                                    Margin="0,0,0,5"/>
 
-                        <!-- Поле подтверждения пароля -->
                         <Grid Margin="0,0,0,20" Width="380">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -223,7 +230,6 @@
             </Border>
         </StackPanel>
 
-        <!-- Сообщения об ошибках -->
         <TextBlock x:Name="MessageText" 
                    Grid.Row="3"
                    Text="" 
